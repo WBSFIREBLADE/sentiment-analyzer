@@ -1,0 +1,20 @@
+<!-- accounts/templates/accounts/register.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+</head>
+<body>
+    <h2>Register</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Register</button>
+        <a href="{% url 'l_a' %}" class="btn">Logout</a>
+        <a href="{% url 'login' %}" class="btn">login</a>
+
+    </form>
+</body>
+</html>

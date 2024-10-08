@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analysis</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Sentiment Analysis</h1>
+
+        <!-- Text Input Form -->
+        <form method="post">
+            {% csrf_token %}
+            <div>
+                <h2>Analyze Text</h2>
+                {{ text_form.as_p }}
+                <button type="submit">Analyze</button>
+            </div>
+        </form>
+
+        <!-- File Upload Form -->
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div>
+                <h2>Upload File</h2>
+                {{ file_form.as_p }}
+                <button type="submit">Upload and Analyze</button>
+            </div>
+        </form>
+
+        <!-- Display Analysis Result -->
+        {% if result %}
+        <div class="result">
+            <h2>Analysis Result</h2>
+            <p><strong>Text:</strong> {{ result.text }}</p>
+            <p><strong>Sentiment:</strong> {{ result.sentiment }}</p>
+            <p><strong>Confidence:</strong> {{ result.confidence }}</p>
+        </div>
+        {% endif %}
+
+        <!-- Optional: Display History -->
+        {% if history %}
+        <div class="history">
+            <h2>Analysis History</h2>
+            <ul>
+                {% for item in history %}
+                <li>
+                    <strong>Text:</strong> {{ item.text }} | 
+                    <strong>Sentiment:</strong> {{ item.sentiment }} | 
+                    <strong>Confidence:</strong> {{ item.confidence }}
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
